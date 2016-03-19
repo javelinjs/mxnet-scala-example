@@ -55,7 +55,7 @@
       </fileset>
     </copy>
     <java classname="me.yzhi.mxnet.example.classification.TrainMnist" classpathref="project.classpath">
-      <arg line="--data-dir=${data.dir}/ --num-epochs=10 --network=mlp --cpus=0,1,2,3"/>
+      <arg line="--data-dir=${data.dir}/ --num-epochs=5 --network=mlp --cpus=0,1,2,3 --optimizer=SGD"/>
     </java>
   </target>
 </project>

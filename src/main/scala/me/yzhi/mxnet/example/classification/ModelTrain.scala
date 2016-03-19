@@ -2,7 +2,7 @@ package me.yzhi.mxnet.example.classification
 
 import ml.dmlc.mxnet.Callback.Speedometer
 import ml.dmlc.mxnet._
-import ml.dmlc.mxnet.optimizer.SGD
+import ml.dmlc.mxnet.optimizer._
 import org.slf4j.LoggerFactory
 
 object ModelTrain {
@@ -13,7 +13,7 @@ object ModelTrain {
           network: Symbol, dataLoader: (String, Int, KVStore) => (DataIter, DataIter),
           kvStore: String, numEpochs: Int, modelPrefix: String = null, loadEpoch: Int = -1,
           lr: Float = 0.1f, lrFactor: Float = 1f, lrFactorEpoch: Float = 1f,
-          clipGradient: Float = 0f): Unit = {
+          clipGradient: Float = 0f, opt: String = "sgd"): Unit = {
     // kvstore
     // TODO: if local mode and no gpu is used, set kv = null
     val kv = KVStore.create(kvStore)
@@ -58,9 +58,22 @@ object ModelTrain {
       } else {
         null
       }
-    val optimizer: Optimizer = new SGD(learningRate = lr,
-        lrScheduler = lrScheduler, clipGradient = clipGradient,
-        momentum = 0.9f, wd = 0.00001f)
+    val optimizer: Optimizer =
+      opt.toLowerCase match {
+        case "adadelta" =>
+          new AdaDelta(rho = lr, clipGradient = clipGradient, wd = 0.00001f)
+        case "adagrad" =>
+          new AdaGrad(learningRate = lr, wd = 0.00001f)
+        case "adam" =>
+          new Adam(wd = 0.00001f)
+        case "rmsprop" =>
+          new RMSProp(wd = 0.00001f)
+        case "sgd" =>
+          new SGD(learningRate = lr, lrScheduler = lrScheduler,
+                  clipGradient = clipGradient, momentum = 0.9f, wd = 0.00001f)
+        case other =>
+          throw new IllegalArgumentException(s"Unsupported optimizer $other")
+      }
 
     val model = new FeedForward(ctx = devs,
                                 symbol = network,
