@@ -12,14 +12,37 @@
 
   <packaging>pom</packaging>
 
-  <repositories>      
-    <repository>
-      <id>ossrh</id>
-      <name>Snapshots Repository</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
+  <profiles>
+    <profile>
+      <id>osx-x86_64-cpu</id>
+      <activation>
+        <os>
+          <family>mac</family>
+          <arch>x86_64</arch>
+        </os>
+      </activation>
+      <properties>
+        <platform>osx-x86_64-cpu</platform>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux-x86_64-cpu</id>
+      <activation>
+        <os>
+          <family>linux</family>
+        </os>
+      </activation>
+      <properties>
+        <platform>linux-x86_64-cpu</platform>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux-x86_64-gpu</id>
+      <properties>
+        <platform>linux-x86_64-gpu</platform>
+      </properties>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
@@ -129,8 +152,8 @@
   <dependencies>
     <dependency>
       <groupId>ml.dmlc.mxnet</groupId>
-      <artifactId>mxnet-full_${scala.binary.version}-osx-x86_64-cpu</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <artifactId>mxnet-full_${scala.binary.version}-${platform}</artifactId>
+      <version>0.1.1</version>
       <exclusions>
         <exclusion>
           <groupId>*</groupId>
