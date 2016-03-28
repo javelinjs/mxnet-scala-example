@@ -1,7 +1,7 @@
 # MXNet Scala Examples
 Examples for Using MXNet Scala Package
 
-Run with `maven` and `scala` installed:
+Run with `maven` and `java` installed:
 
 ```bash
 mvn clean package
