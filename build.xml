@@ -11,7 +11,7 @@
   <property name="build.dir" value="build"/>
   <property name="data.dir" value="data"/>
   <!-- XXX: Please set your own SCALA_HOME -->
-  <property name="scala.home" value="/usr/local/Cellar/scala210/2.10.5/libexec"/>
+  <property name="scala.home" value="/usr/local/Cellar/scala/2.11.5/libexec"/>
 
   <target name="clean" description="clean up">
     <delete dir="${build.dir}"/>
