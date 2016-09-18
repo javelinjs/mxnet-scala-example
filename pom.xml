@@ -6,8 +6,8 @@
   <name>MXNet Examples</name>
 
   <properties>
-    <scala.version>2.10.4</scala.version>
-    <scala.binary.version>2.10</scala.binary.version>
+    <scala.version>2.11.8</scala.version>
+    <scala.binary.version>2.11</scala.binary.version>
   </properties>
 
   <packaging>pom</packaging>
@@ -153,7 +153,7 @@
     <dependency>
       <groupId>ml.dmlc.mxnet</groupId>
       <artifactId>mxnet-full_${scala.binary.version}-${platform}</artifactId>
-      <version>0.1.1</version>
+      <version>0.1.2-SNAPSHOT</version>
       <exclusions>
         <exclusion>
           <groupId>*</groupId>
