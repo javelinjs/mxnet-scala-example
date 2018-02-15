@@ -23,6 +23,7 @@ object CustomOpDebug {
       y.set(yArr)
       this.assign(outData(0), req(0), y)
       y.dispose()
+//      inData.foreach(_.dispose())
     }
 
     override def backward(req: Array[String], outGrad: Array[NDArray],
@@ -88,6 +89,7 @@ object CustomOpDebug {
       val fc3 = Symbol.FullyConnected("fc3")()(Map("data" -> act2, "num_hidden" -> 10))
       val mlp = Symbol.Custom("softmax")()(Map("data" -> fc3,
         "label" -> label, "op_type" -> "softmax"))
+//      val mlp = Symbol.SoftmaxOutput(name = "softmax")()(Map("data" -> fc3, "label" -> label))
 
       val (trainIter, testIter) =
         Data.mnistIterator(leop.dataPath, batchSize = 100, inputShape = Shape(784))
@@ -119,6 +121,8 @@ object CustomOpDebug {
           argDict("data").set(dataBatch.data(0))
           argDict("label").set(dataBatch.label(0))
           executor.forward(isTrain = false)
+          executor.outputs(0).toArray
+          dataBatch.dispose()
         }
         println(s"Finished epoch $nEpoch")
         nEpoch += 1
