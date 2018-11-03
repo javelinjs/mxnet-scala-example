@@ -7,7 +7,7 @@ DATA_DIR=$PROJ_DIR/data
 $CURR_DIR/get_mnist_data.sh $DATA_DIR
 
 CLASSPATH=$CLASSPATH:$PROJ_DIR/target/*:$PROJ_DIR/target/classes/lib/*
-java -Xmx4m -cp $CLASSPATH \
+java -Xmx2G -cp $CLASSPATH \
   -Dlog4j.configuration=file://$PROJ_DIR/conf/log4j.properties \
   me.yzhi.mxnet.example.classification.TrainMnist \
   --data-dir=$DATA_DIR/ \

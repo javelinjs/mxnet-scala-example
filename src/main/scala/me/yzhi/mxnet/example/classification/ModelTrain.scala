@@ -1,8 +1,8 @@
 package me.yzhi.mxnet.example.classification
 
-import ml.dmlc.mxnet.Callback.Speedometer
-import ml.dmlc.mxnet._
-import ml.dmlc.mxnet.optimizer._
+import org.apache.mxnet.Callback.Speedometer
+import org.apache.mxnet._
+import org.apache.mxnet.optimizer._
 import org.slf4j.LoggerFactory
 
 object ModelTrain {

@@ -1,6 +1,6 @@
 package me.yzhi.mxnet.example.classification
 
-import ml.dmlc.mxnet._
+import org.apache.mxnet._
 import org.kohsuke.args4j.{CmdLineParser, Option}
 import org.slf4j.LoggerFactory
 
